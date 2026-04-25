@@ -28,10 +28,7 @@ export async function POST(request: Request) {
     }
 
     if (!REDIRECT_URL) {
-      return Response.json(
-        { error: 'Priyo Pay redirect URL not configured' },
-        { status: 500 }
-      );
+      return Response.json({ error: 'Priyo Pay redirect URL not configured' }, { status: 500 });
     }
 
     const cartId = (await cookies()).get('cartId')?.value;
@@ -124,4 +121,3 @@ export async function POST(request: Request) {
     );
   }
 }
-

@@ -7,14 +7,18 @@ Your e-commerce application has been successfully integrated with **Priyo Pay** 
 ## Changes Made
 
 ### 1. **Environment Configuration** (`.env`)
+
 ✅ Added two new variables:
+
 ```env
 PRIYO_PAY_API_KEY=YOUR_PRIYO_PAY_API_KEY
 NEXT_PUBLIC_PRIYO_PAY_REDIRECT_URL=http://localhost:3001/success
 ```
 
-### 2. **Payment API Endpoint** 
+### 2. **Payment API Endpoint**
+
 ✅ Created: `app/api/payment/priyo-pay/route.ts`
+
 - Handles payment link creation with Priyo Pay API
 - Converts cart items to Priyo Pay format (amounts in cents)
 - Generates unique order references
@@ -22,7 +26,9 @@ NEXT_PUBLIC_PRIYO_PAY_REDIRECT_URL=http://localhost:3001/success
 - Validates minimum order amount ($10)
 
 ### 3. **Checkout Integration**
+
 ✅ Updated: `components/cart/modal.tsx`
+
 - Replaced Paddle checkout with Priyo Pay payment links
 - Removed Paddle dependencies and imports
 - Added toast notifications for user feedback
@@ -30,12 +36,16 @@ NEXT_PUBLIC_PRIYO_PAY_REDIRECT_URL=http://localhost:3001/success
 - Graceful error handling
 
 ### 4. **Dependencies**
+
 ✅ Updated: `package.json`
+
 - Removed `@paddle/paddle-js` dependency
 - Kept all other dependencies intact
 
 ### 5. **Documentation**
+
 ✅ Created: `PRIYO_PAY_SETUP.md`
+
 - Complete setup guide
 - Configuration instructions
 - API reference
@@ -56,22 +66,23 @@ User Interaction:
 
 ## Files Modified
 
-| File | Change |
-|------|--------|
-| `.env` | Added Priyo Pay configuration variables |
+| File                        | Change                                     |
+| --------------------------- | ------------------------------------------ |
+| `.env`                      | Added Priyo Pay configuration variables    |
 | `components/cart/modal.tsx` | Replaced Paddle with Priyo Pay integration |
-| `package.json` | Removed @paddle/paddle-js dependency |
+| `package.json`              | Removed @paddle/paddle-js dependency       |
 
 ## Files Created
 
-| File | Purpose |
-|------|---------|
-| `app/api/payment/priyo-pay/route.ts` | Payment link creation API |
-| `PRIYO_PAY_SETUP.md` | Complete integration guide |
+| File                                 | Purpose                    |
+| ------------------------------------ | -------------------------- |
+| `app/api/payment/priyo-pay/route.ts` | Payment link creation API  |
+| `PRIYO_PAY_SETUP.md`                 | Complete integration guide |
 
 ## Next Steps
 
 1. **Update your API Key:**
+
    ```bash
    # Edit .env and replace:
    PRIYO_PAY_API_KEY=YOUR_PRIYO_PAY_API_KEY
@@ -79,18 +90,21 @@ User Interaction:
    ```
 
 2. **Update redirect URL for production:**
+
    ```bash
    # Edit .env and update:
    NEXT_PUBLIC_PRIYO_PAY_REDIRECT_URL=https://yourdomain.com/success
    ```
 
 3. **Reinstall dependencies (optional but recommended):**
+
    ```bash
    pnpm install
    # This will remove @paddle/paddle-js from node_modules
    ```
 
 4. **Restart development server:**
+
    ```bash
    pnpm dev
    ```
@@ -104,6 +118,7 @@ User Interaction:
 ## API Integration Details
 
 ### Request Payload Example
+
 ```json
 {
   "reference_id": "order-1234567890-abc123xyz",
@@ -120,7 +135,9 @@ User Interaction:
 ```
 
 ### Response Format
+
 The API returns a payment link URL that customers can be redirected to:
+
 ```json
 {
   "success": true,
@@ -135,12 +152,14 @@ The API returns a payment link URL that customers can be redirected to:
 ## Security Notes
 
 ✅ **Implemented:**
+
 - API key stored in environment variables (never in code)
 - API calls made server-side only
 - No sensitive data exposed to client
 - Proper error handling and logging
 
 ⚠️ **Remember:**
+
 - Keep `PRIYO_PAY_API_KEY` confidential
 - Use sandbox credentials for testing
 - Switch to production credentials when deploying
@@ -155,6 +174,7 @@ The API returns a payment link URL that customers can be redirected to:
 ## Reverting to Previous Payment Method
 
 If you need to revert to Paddle:
+
 1. Restore the original `components/cart/modal.tsx`
 2. Re-add `@paddle/paddle-js` to `package.json`
 3. Run `pnpm install`

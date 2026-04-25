@@ -3,6 +3,7 @@
 ## Pre-Launch Checklist
 
 ### Step 1: Configure API Key
+
 - [ ] Get your Priyo Pay API key from dashboard
 - [ ] Update `.env`:
   ```env
@@ -12,16 +13,19 @@
 - [ ] Create `.env.local` for secrets (add to `.gitignore`)
 
 ### Step 2: Configure Redirect URL
+
 - [ ] Update `.env` redirect URL:
   - **Development:** `http://localhost:3001/success` (already set)
   - **Production:** `https://yourdomain.com/success`
 - [ ] Verify success page exists at `app/(static-pages)/success/page.tsx`
 
 ### Step 3: Install Dependencies
+
 - [ ] Run `pnpm install` to update packages
 - [ ] Verify `@paddle/paddle-js` is removed from `node_modules`
 
 ### Step 4: Test Integration
+
 - [ ] Start dev server: `pnpm dev`
 - [ ] Add product to cart
 - [ ] Click "Proceed to Checkout"
@@ -29,12 +33,14 @@
 - [ ] Check browser console for any errors
 
 ### Step 5: Test Payment Flow (Sandbox)
+
 - [ ] Use Priyo Pay test payment methods
 - [ ] Complete test payment
 - [ ] Verify redirect to success page
 - [ ] Check order reference in logs
 
 ### Step 6: Production Deployment
+
 - [ ] Update `.env` with production API key
 - [ ] Update `NEXT_PUBLIC_PRIYO_PAY_REDIRECT_URL` to production domain
 - [ ] Set `PRIYO_PAY_API_KEY` as environment variable in hosting platform
@@ -44,12 +50,12 @@
 
 ## Troubleshooting Quick Reference
 
-| Issue | Solution |
-|-------|----------|
-| "API key not configured" | Check `.env` has `PRIYO_PAY_API_KEY`, restart server |
-| "No cart found" | Add item to cart, ensure cookies enabled |
-| Not redirecting to payment | Check Priyo Pay API status, verify API key is valid |
-| Stuck on payment page | Clear browser cache, check network errors in DevTools |
+| Issue                        | Solution                                                |
+| ---------------------------- | ------------------------------------------------------- |
+| "API key not configured"     | Check `.env` has `PRIYO_PAY_API_KEY`, restart server    |
+| "No cart found"              | Add item to cart, ensure cookies enabled                |
+| Not redirecting to payment   | Check Priyo Pay API status, verify API key is valid     |
+| Stuck on payment page        | Clear browser cache, check network errors in DevTools   |
 | Redirect fails after payment | Verify success page route, check redirect URL in `.env` |
 
 ## File Locations
@@ -77,13 +83,13 @@ NEXT_PUBLIC_PRIYO_PAY_REDIRECT_URL=http://localhost:3001/success
 
 ## Development vs Production
 
-| Aspect | Development | Production |
-|--------|-------------|------------|
-| API Key | Test/Sandbox key | Production key |
-| Redirect URL | `http://localhost:3001/success` | `https://yourdomain.com/success` |
-| Payment Methods | Test cards | Real payment methods |
-| HTTPS | Optional | Required |
-| Logging | Verbose | Production-safe |
+| Aspect          | Development                     | Production                       |
+| --------------- | ------------------------------- | -------------------------------- |
+| API Key         | Test/Sandbox key                | Production key                   |
+| Redirect URL    | `http://localhost:3001/success` | `https://yourdomain.com/success` |
+| Payment Methods | Test cards                      | Real payment methods             |
+| HTTPS           | Optional                        | Required                         |
+| Logging         | Verbose                         | Production-safe                  |
 
 ## Quick Commands
 
