@@ -1,5 +1,24 @@
 # Priyo Pay Integration - Quick Setup Checklist
 
+## Pricing Issues Fixed ✅
+
+### Issues Resolved:
+
+- ✅ **Minimum Order Amount**: Changed from $10 to $1 to allow purchases of low-value items
+- ✅ **Unit Price Calculation**: Fixed pricing to send unit price (not total) to Priyo Pay API
+- ✅ **Quantity Handling**: Correctly handles quantity multiplication on Priyo Pay side
+
+### Pricing Logic:
+
+- Cart stores: `totalAmount` (unit price × quantity)
+- Priyo Pay expects: `amount_cents` (unit price in cents) + `quantity`
+- Fixed calculation: `unitPrice = totalAmount / quantity`, then `amount_cents = unitPrice * 100`
+
+### Test Case Verified:
+
+- Product: $1 × 10 quantity = $10 total
+- Priyo Pay receives: 100 cents × 10 quantity = $10 total ✅
+
 ## Pre-Launch Checklist
 
 ### Step 1: Configure API Key

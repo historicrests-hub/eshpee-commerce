@@ -43,17 +43,22 @@ export async function POST(request: Request) {
 
     // Validate cart total
     const totalAmount = Number(cart.cost.totalAmount.amount);
-    if (totalAmount < 10) {
-      // Priyo Pay minimum is 1000 cents ($10)
-      return Response.json({ error: 'Cart total must be at least $10' }, { status: 400 });
+    if (totalAmount < 1) {
+      // Priyo Pay minimum is 100 cents ($1)
+      return Response.json({ error: 'Cart total must be at least $1' }, { status: 400 });
     }
 
     // Convert cart items to Priyo Pay format
-    const items: PriyoPayItem[] = cart.lines.map((line) => ({
-      description: `${line.merchandise.product.title}${line.merchandise.title !== 'Default Title' ? ` - ${line.merchandise.title}` : ''}`,
-      amount_cents: Math.round(Number(line.cost.totalAmount.amount) * 100), // Convert to cents
-      quantity: line.quantity
-    }));
+    const items: PriyoPayItem[] = cart.lines.map((line) => {
+      // Calculate unit price (total amount divided by quantity)
+      const unitPrice = Number(line.cost.totalAmount.amount) / line.quantity;
+
+      return {
+        description: `${line.merchandise.product.title}${line.merchandise.title !== 'Default Title' ? ` - ${line.merchandise.title}` : ''}`,
+        amount_cents: Math.round(unitPrice * 100), // Convert unit price to cents
+        quantity: line.quantity
+      };
+    });
 
     // Generate unique reference ID
     const referenceId = `order-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;

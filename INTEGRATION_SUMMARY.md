@@ -23,7 +23,7 @@ NEXT_PUBLIC_PRIYO_PAY_REDIRECT_URL=http://localhost:3001/success
 - Converts cart items to Priyo Pay format (amounts in cents)
 - Generates unique order references
 - Comprehensive error handling
-- Validates minimum order amount ($10)
+- Validates minimum order amount ($1)
 
 ### 3. **Checkout Integration**
 

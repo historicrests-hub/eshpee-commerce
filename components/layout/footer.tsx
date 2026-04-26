@@ -56,7 +56,7 @@ export default async function Footer() {
             className="flex h-8 w-max flex-none items-center justify-center rounded-md border border-neutral-200 bg-white text-xs text-black dark:border-neutral-700 dark:bg-black dark:text-white"
             aria-label="social"
             target="_blank"
-            href="https://www.facebook.com/aptiverse.shop/"
+            href="/"
           >
             <span className="px-3">
               <Image src={FbLogo} height={20} width={20} alt="facebook" />
